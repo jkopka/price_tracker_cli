@@ -7,11 +7,11 @@ namespace price_tracker_cli
     public class SearchItem
     {
         public string url;
-        public List<double> all_prices = new List<double>();
+        public List<double> allPrices = new List<double>();
         public int quantity = 0;
-        public int quantity_ignored = 0;
+        public int quantityIgnored = 0;
         public string searchQuery;
-        public string url_next_page;
+        public string urlNextPage;
         public bool searched = false;
         public string error = "";
         public int pages = 1;
@@ -27,9 +27,17 @@ namespace price_tracker_cli
         /// <summary>
         /// Gibt den Median als formatierte Währungszahl zurück
         /// </summary>
-        public string getFormatedMedian()
+        public string GetFormatedMedian()
         {
-            return FormatPrice(calcMedian(all_prices.ToArray()));
+            return FormatPrice(CalcMedian(allPrices.ToArray()));
+        }
+
+        /// <summary>
+        /// Gibt den Median als Double zurück
+        /// </summary>
+        public double GetMedian()
+        {
+            return CalcMedian(allPrices.ToArray());
         }
 
         /// <summary>
@@ -37,7 +45,7 @@ namespace price_tracker_cli
         /// </summary>
         /// <param name="sourceNumbers"></param>
         /// <returns>median</returns>
-        public static double calcMedian(double[] sourceNumbers)
+        public static double CalcMedian(double[] sourceNumbers)
         {
             if (sourceNumbers == null || sourceNumbers.Length == 0)
                 throw new System.Exception("Median of empty array not defined.");
